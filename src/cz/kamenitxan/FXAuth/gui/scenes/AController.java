@@ -1,10 +1,9 @@
-package cz.kamenitxan.sceneswitcher.demo.gui.scenes;
+package cz.kamenitxan.FXAuth.gui.scenes;
 
-import cz.kamenitxan.sceneswitcher.SceneSwitcher;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 
 /**
  * Main controller class for the entire layout.
@@ -13,18 +12,16 @@ public class AController {
 	private static AController aController = null;
 
 	@FXML
-	private Button switchButton;
+	private Label title;
 
 	@FXML
-	private Label labe;
+	public Label code;
 
 	@FXML
-	private void switchscene() {
-		SceneSwitcher.getInstance().loadScene("b", "cs");
-	}
+	private ProgressBar timer;
 
 	private void setCode(String newCode) {
-		labe.setText(newCode);
+		code.setText(newCode);
 	}
 
 	public void updateCode(String code) {
@@ -35,11 +32,24 @@ public class AController {
 		}
 	}
 
+	public void updateTimer(double count) {
+		final double time = (count * 3.333) / 100;
+		//System.out.println(time);
+		if(Platform.isFxApplicationThread()) {
+			timer.setProgress(count);
+		} else {
+			Platform.runLater(() -> timer.setProgress(time));
+		}
+	}
+
 	public AController() {
 		aController = this;
 	}
 
 	public static AController getInstalnce() {
+		if (aController == null) {
+			aController = new AController();
+		}
 		return aController;
 	}
 }

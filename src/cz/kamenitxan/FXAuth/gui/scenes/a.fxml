@@ -1,28 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?scenebuilder-stylesheet vista.css?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="299.0" prefWidth="395.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.kamenitxan.sceneswitcher.demo.gui.scenes.AController">
-    <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    </rowConstraints>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="117.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.kamenitxan.FXAuth.gui.scenes.AController">
    <children>
-       <Pane prefHeight="200.0" prefWidth="200.0">
-          <children>
-              <Label fx:id="labe" layoutX="152.0" layoutY="67.0" text="This is scene A" />
-          </children>
-       </Pane>
-       <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-          <children>
-              <Button fx:id="switchButton" layoutX="134.0" layoutY="62.0" mnemonicParsing="false" onAction="#switchscene" text="Switch to scene B" />
-          </children>
-       </Pane>
+      <BorderPane prefHeight="109.0" prefWidth="600.0">
+         <bottom>
+            <ProgressBar fx:id="timer" prefHeight="20.0" prefWidth="260.0" progress="0.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="5.0" />
+               </BorderPane.margin>
+            </ProgressBar>
+         </bottom>
+         <top>
+            <Label fx:id="title" text="Label" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets top="5.0" />
+               </BorderPane.margin>
+            </Label>
+         </top>
+         <center>
+            <Label fx:id="code" text="Label" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="46.0" />
+               </font>
+            </Label>
+         </center>
+      </BorderPane>
    </children>
-</GridPane>
+</VBox>

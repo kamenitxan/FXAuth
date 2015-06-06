@@ -1,6 +1,6 @@
 package cz.kamenitxan.FXAuth.core;
 
-import cz.kamenitxan.sceneswitcher.demo.gui.scenes.AController;
+import cz.kamenitxan.FXAuth.gui.scenes.AController;
 
 import java.security.GeneralSecurityException;
 import javax.crypto.Mac;
@@ -44,6 +44,7 @@ public class AuthenticatorCLI {
       }
         previouscode = newout;
         count++;
+      aController.updateTimer(count);
     }
   }
 
