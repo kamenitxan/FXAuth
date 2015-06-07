@@ -20,15 +20,11 @@ public class AController {
 	@FXML
 	private ProgressBar timer;
 
-	private void setCode(String newCode) {
-		code.setText(newCode);
-	}
-
 	public void updateCode(String code) {
 		if(Platform.isFxApplicationThread()) {
-			setCode(code);
+			this.code.setText(code);
 		} else {
-			Platform.runLater(() -> setCode(code));
+			Platform.runLater(() -> this.code.setText(code));
 		}
 	}
 
@@ -40,6 +36,10 @@ public class AController {
 		} else {
 			Platform.runLater(() -> timer.setProgress(time));
 		}
+	}
+
+	public void setTitle(String title) {
+		Platform.runLater(() -> this.title.setText(title));
 	}
 
 	public AController() {

@@ -58,11 +58,7 @@ public class PasscodeGenerator {
    * @param interval The interval that a passcode is valid for
    */
   public PasscodeGenerator(final Mac mac, int passCodeLength, int interval) {
-    this(new Signer() {
-      public byte[] sign(byte[] data){
-        return mac.doFinal(data);
-      }
-    }, passCodeLength, interval);
+    this(mac::doFinal, passCodeLength, interval);
   }
 
   public PasscodeGenerator(Signer signer, int passCodeLength, int interval) {
