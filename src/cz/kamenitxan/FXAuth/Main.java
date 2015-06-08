@@ -2,7 +2,6 @@ package cz.kamenitxan.FXAuth;
 
 import com.aquafx_project.AquaFx;
 import cz.kamenitxan.FXAuth.core.AuthenticatorCLI;
-import cz.kamenitxan.sceneswitcher.SceneSwitcher;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -11,9 +10,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Main extends Application {
 	private static List<String[]> secrets = null;

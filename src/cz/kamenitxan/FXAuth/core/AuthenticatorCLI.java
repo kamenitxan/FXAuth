@@ -43,15 +43,15 @@ public class AuthenticatorCLI {
 		public void run() {
 			String newout = AuthenticatorCLI.computePin(secret);
 			if (previouscode.equals(newout)) {
-				System.out.print(".");
+				//System.out.print(".");
 			} else {
 				if (count <= 30) {
 					for (int i = count + 1; i <= 30; i++) {
-						System.out.print("+");
+						//System.out.print("+");
 					}
 				}
 				aController.updateCode(newout, name);
-				System.out.println(": " + newout + " :");
+				System.out.println(name + " : " + newout + " :");
 				count = 0;
 			}
 			previouscode = newout;

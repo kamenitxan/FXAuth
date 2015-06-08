@@ -16,7 +16,7 @@ Installation
 
 Compile sources and then
 
-	java -jar FXAuth.jar -secret=MY_SECRET_KEY
+	java -jar FXAuth.jar -site:MY_SECRET_KEY -Facebook:MY_SECRET_KEY -Google:MY_SECRET_KEY
 
 
 Acknowledgements
