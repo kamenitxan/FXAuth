@@ -5,38 +5,37 @@ import cz.kamenitxan.FXAuth.core.AuthenticatorCLI;
 import cz.kamenitxan.sceneswitcher.SceneSwitcher;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main extends Application {
-	private static String secret = null;
-	private final SceneSwitcher sceneSwitcher = SceneSwitcher.getInstance();
+	private static List<String[]> secrets = null;
 	private List<AuthenticatorCLI> authenticators = new ArrayList<>();
 
     @Override
     public void start(Stage stage) throws Exception{
-
-		sceneSwitcher.addScene("a", "a.fxml");
-		sceneSwitcher.addScene("b", "b.fxml");
+		Parent root = FXMLLoader.load(getClass().getResource("gui/scenes/a.fxml"));
+		stage.setScene(new Scene(root, 300, 275));
+		stage.show();
 
 		stage.setTitle("FXAuth");
-		stage.setScene(sceneSwitcher.createMainScene(this.getClass()));
 		AquaFx.style();
-		sceneSwitcher.loadScene("a");
 
 		stage.show();
 
         System.out.println("Authenticator Started!");
-        System.out.println(":----------------------------:--------:");
-        System.out.println(":       Code Wait Time       :  Code  :");
-        System.out.println(":----------------------------:--------:");
-        AuthenticatorCLI main = new AuthenticatorCLI("Facebook", secret);
-		authenticators.add(main);
 
-		AuthenticatorCLI google = new AuthenticatorCLI("Google", secret);
-		authenticators.add(google);
+		for (String[] site : secrets) {
+			AuthenticatorCLI authenticator = new AuthenticatorCLI(site[0], site[1]);
+			authenticators.add(authenticator);
+		}
 
 		stage.setOnCloseRequest(e -> {
 			authenticators.stream().forEach(a -> a.stop());
@@ -47,14 +46,16 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-		secret = getSecret(args);
+		getSecret(args);
         launch(args);
     }
 
-	private static String getSecret(String[] args) {
-		if (args.length > 0  && args[0].indexOf("-secret=") == 0) {
-			return args[0].substring(8);
+	private static void getSecret(String[] args) {
+		secrets = new ArrayList<>();
+		for (String arg : args) {
+			String[] couple = arg.split(":");
+			couple[0] = couple[0].substring(1);
+			secrets.add(couple);
 		}
-		return "";
 	}
 }
