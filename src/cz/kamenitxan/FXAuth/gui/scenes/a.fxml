@@ -8,9 +8,9 @@
 <?scenebuilder-stylesheet vista.css?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="117.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.kamenitxan.FXAuth.gui.scenes.AController">
+<VBox fx:id="vbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="117.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.kamenitxan.FXAuth.gui.scenes.AController">
    <children>
-      <BorderPane prefHeight="109.0" prefWidth="600.0">
+     <!-- <BorderPane prefHeight="109.0" prefWidth="600.0">
          <bottom>
             <ProgressBar fx:id="timer" prefHeight="20.0" prefWidth="260.0" progress="0.0" BorderPane.alignment="CENTER">
                <BorderPane.margin>
@@ -32,6 +32,6 @@
                </font>
             </Label>
          </center>
-      </BorderPane>
+      </BorderPane>-->
    </children>
 </VBox>

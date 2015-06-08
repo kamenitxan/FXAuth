@@ -32,15 +32,18 @@ public class Main extends Application {
         System.out.println(":----------------------------:--------:");
         System.out.println(":       Code Wait Time       :  Code  :");
         System.out.println(":----------------------------:--------:");
-        AuthenticatorCLI main = new AuthenticatorCLI("Facebook");
+        AuthenticatorCLI main = new AuthenticatorCLI("Facebook", secret);
 		authenticators.add(main);
+
+		AuthenticatorCLI google = new AuthenticatorCLI("Google", secret);
+		authenticators.add(google);
 
 		stage.setOnCloseRequest(e -> {
 			authenticators.stream().forEach(a -> a.stop());
 			Platform.exit();
 		});
 
-		main.reminder(secret);
+		authenticators.stream().forEach(a -> a.reminder());
     }
 
     public static void main(String[] args) {

@@ -12,15 +12,17 @@ public class AuthenticatorCLI {
 	Timer timer = null;
 	AController aController = AController.getInstalnce();
 	String name;
+	String secret;
 
 	int count = 1;
 
-	public AuthenticatorCLI(String name) {
+	public AuthenticatorCLI(String name, String secret) {
 		this.name = name;
-		aController.setTitle(this.name);
+		this.secret = secret;
+		aController.addSite(this);
 	}
 
-	public void reminder(String secret) {
+	public void reminder() {
 		timer = new Timer();
 		timer.scheduleAtFixedRate(new TimedPin(secret), 0, 1 * 1000);
 	}
@@ -48,13 +50,13 @@ public class AuthenticatorCLI {
 						System.out.print("+");
 					}
 				}
-				aController.updateCode(newout);
+				aController.updateCode(newout, name);
 				System.out.println(": " + newout + " :");
 				count = 0;
 			}
 			previouscode = newout;
 			count++;
-			aController.updateTimer(count);
+			aController.updateTimer(count, name);
 		}
 	}
 
@@ -74,5 +76,13 @@ public class AuthenticatorCLI {
 		} catch (Base32String.DecodingException e) {
 			return "Decoding exception";
 		}
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void addToUI() {
+		aController.addSite(this);
 	}
 }

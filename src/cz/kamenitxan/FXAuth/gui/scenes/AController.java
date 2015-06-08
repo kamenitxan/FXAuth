@@ -1,46 +1,45 @@
 package cz.kamenitxan.FXAuth.gui.scenes;
 
+import cz.kamenitxan.FXAuth.core.AuthenticatorCLI;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Main controller class for the entire layout.
  */
 public class AController {
 	private static AController aController = null;
+	private Map<String, SiteFragment> siteFragments = new HashMap<>();
 
 	@FXML
-	private Label title;
+	private VBox vbox;
 
-	@FXML
-	public Label code;
-
-	@FXML
-	private ProgressBar timer;
-
-	public void updateCode(String code) {
-		if(Platform.isFxApplicationThread()) {
-			this.code.setText(code);
-		} else {
-			Platform.runLater(() -> this.code.setText(code));
-		}
+	public void updateCode(String code, String site) {
+		Label label = siteFragments.get(site).getCodeLabel();
+		Platform.runLater(() -> label.setText(code));
 	}
 
-	public void updateTimer(double count) {
+	public void updateTimer(double count, String site) {
 		final double time = (count * 3.333) / 100;
 		//System.out.println(time);
-		if(Platform.isFxApplicationThread()) {
-			timer.setProgress(count);
-		} else {
-			Platform.runLater(() -> timer.setProgress(time));
-		}
+		ProgressBar timer = siteFragments.get(site).getProgressBar();
+		Platform.runLater(() -> timer.setProgress(time));
 	}
 
-	public void setTitle(String title) {
-		Platform.runLater(() -> this.title.setText(title));
+	public void addSite(AuthenticatorCLI authenticatorCLI) {
+		SiteFragment siteFragment = new SiteFragment(authenticatorCLI);
+		vbox.getChildren().add(siteFragment.getBorderPane());
+
+		siteFragments.put(authenticatorCLI.getName(), siteFragment);
 	}
+
 
 	public AController() {
 		aController = this;
