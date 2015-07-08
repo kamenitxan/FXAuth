@@ -23,7 +23,9 @@ public class Main extends Application {
 		stage.show();
 
 		stage.setTitle("FXAuth");
-		AquaFx.style();
+		if(System.getProperty("os.name").equals("Mac OS X")){
+			AquaFx.style();
+		}
 
 		stage.show();
 
