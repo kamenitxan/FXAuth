@@ -13,6 +13,9 @@ http://code.google.com/p/google-authenticator/
 
 Installation
 ------------
+List of required libraries:
+
+	com.aquafx-project:aquafx:0.2
 
 Compile sources and then
 
