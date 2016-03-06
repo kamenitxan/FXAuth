@@ -1,19 +1,22 @@
 package cz.kamenitxan.FXAuth.gui.scenes;
 
+import cz.kamenitxan.FXAuth.Main;
 import cz.kamenitxan.FXAuth.core.AuthenticatorCLI;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 /**
  * Main controller class for the entire layout.
  */
-public class AController {
+public class AController implements Initializable{
 	private static AController aController = null;
 	private Map<String, SiteFragment> siteFragments = new HashMap<>();
 
@@ -37,6 +40,7 @@ public class AController {
 		vbox.getChildren().add(siteFragment.getBorderPane());
 
 		siteFragments.put(authenticatorCLI.getName(), siteFragment);
+		Main.stage.setHeight(Main.stage.getHeight() +  120);
 	}
 
 
@@ -50,4 +54,28 @@ public class AController {
 		}
 		return aController;
 	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		MenuBar menuBar = new MenuBar();
+		if (Main.isOSX) {
+			menuBar.useSystemMenuBarProperty().set(true);
+		} else {
+			Main.stage.setHeight(40);
+		}
+
+		final Menu menu1 = new Menu("Options");
+		final MenuItem sitesOption = new MenuItem("Sites");
+		sitesOption.setOnAction(a -> openSettings());
+		menu1.getItems().add(sitesOption);
+		menuBar.getMenus().add(menu1);
+
+		vbox.getChildren().add(menuBar);
+
+	}
+
+	public void openSettings() {
+		System.out.println("tdes");
+	}
+
 }

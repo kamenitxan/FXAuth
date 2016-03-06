@@ -15,15 +15,21 @@ import java.util.List;
 public class Main extends Application {
 	private static List<String[]> secrets = null;
 	private List<AuthenticatorCLI> authenticators = new ArrayList<>();
+	public static Stage stage = null;
+	public static boolean isOSX = false;
 
     @Override
     public void start(Stage stage) throws Exception{
+		Main.stage = stage;
 		Parent root = FXMLLoader.load(getClass().getResource("gui/scenes/a.fxml"));
 		stage.setScene(new Scene(root, 300, 275));
+		stage.setMaxWidth(300);
+		stage.setMinWidth(300);
 		stage.show();
 
 		stage.setTitle("FXAuth");
 		if(System.getProperty("os.name").equals("Mac OS X")){
+			isOSX = true;
 			AquaFx.style();
 		}
 
