@@ -21,7 +21,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception{
 		Main.stage = stage;
-		Parent root = FXMLLoader.load(getClass().getResource("gui/scenes/a.fxml"));
+		Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("a.fxml"));
 		stage.setScene(new Scene(root, 300, 275));
 		stage.setMaxWidth(300);
 		stage.setMinWidth(300);
@@ -43,11 +43,11 @@ public class Main extends Application {
 		}
 
 		stage.setOnCloseRequest(e -> {
-			authenticators.stream().forEach(a -> a.stop());
+			authenticators.forEach(AuthenticatorCLI::stop);
 			Platform.exit();
 		});
 
-		authenticators.stream().forEach(a -> a.reminder());
+		authenticators.forEach(AuthenticatorCLI::reminder);
     }
 
     public static void main(String[] args) {
