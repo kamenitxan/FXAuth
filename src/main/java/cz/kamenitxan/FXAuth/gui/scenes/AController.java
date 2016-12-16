@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import static cz.kamenitxan.FXAuth.gui.scenes.Settings.openSettings;
+
 /**
  * Main controller class for the entire layout.
  */
@@ -74,8 +76,6 @@ public class AController implements Initializable{
 
 	}
 
-	public void openSettings() {
-		System.out.println("tdes");
-	}
+
 
 }
